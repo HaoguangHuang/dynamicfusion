@@ -243,8 +243,8 @@ void kfusion::cuda::TsdfVolume::surface_fusion(const WarpField& warp_field,
     std::vector<float> ro = psdf(warped, depth, intr);
 
     cuda::Dists dists;
-    cuda::computeDists(depth, dists, intr);
-    integrate(dists, camera_pose, intr);
+    cuda::computeDists(depth, dists, intr); //pre_compute dists from depth map
+    integrate(dists, camera_pose, intr); // why only use one affine3d transformation in this process???
 
     for(size_t i = 0; i < ro.size(); i++)
     {
@@ -276,7 +276,7 @@ std::vector<float> kfusion::cuda::TsdfVolume::psdf(const std::vector<Vec3f>& war
                                                    const Intr& intr)
 {
     device::Projector proj(intr.fx, intr.fy, intr.cx, intr.cy);
-    std::vector<float4, std::allocator<float4>> point_type(warped.size());
+    std::vector<float4, std::allocator<float4>> point_type(warped.size()); //warped:a point cloud
     for(int i = 0; i < warped.size(); i++)
     {
         point_type[i].x = warped[i][0];

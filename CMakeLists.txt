@@ -48,7 +48,11 @@ find_package(OpenCV REQUIRED COMPONENTS core viz highgui calib3d)
 find_package(CUDA REQUIRED)
 find_package(OpenNI)
 find_package(Ceres REQUIRED)
+
 include_directories(${OpenCV_INCLUDE_DIRS} ${CERES_INCLUDE_DIRS} ${Boost_INCLUDE_DIR} ${CUDA_INCLUDE_DIRS} ${OPENNI_INCLUDE_DIR} "kfusion/src/utils" "kfusion/include/nanoflann")
+include_directories("/home/hhg/Documents/myGithub2/Optlang/Opt/examples/shared")
+include_directories("/home/hhg/Documents/myGithub2/Optlang/Opt/API/release/include")
+include_directories("/home/hhg/Documents/myGithub2/mLib/mLib/mLib/include")
 if(OPENNI_FOUND)
     message("FOUND OPENNI AT: ${OPENNI_INCLUDE_DIR}")
 endif()
@@ -67,13 +71,23 @@ if(UNIX OR APPLE)
 endif()
 
 #warnings_disable(CMAKE_CXX_FLAGS /wd4985)
-set(OPT_INCLUDE_DIRS /home/mihai/Projects/Opt/examples/external/mLib/include /home/mihai/Projects/Opt/examples/shared/ /home/mihai/Projects/Opt/API/release/include)
-set(OPT_LIBRARIES /home/mihai/Projects/Opt/API/release/lib/libOptDev.a)
-set(TERRA_LIBRARIES /home/mihai/Projects/terra/lib/libterra.a)
-set(OPENMESH_LIBRARIES /home/mihai/Downloads/OpenMesh-6.3/build/Build/lib/libOpenMeshCore.a /home/mihai/Downloads/OpenMesh-6.3/build/Build/lib/libOpenMeshTools.a)
+#set(OPT_INCLUDE_DIRS /home/mihai/Projects/Opt/examples/external/mLib/include /home/mihai/Projects/Opt/examples/shared/ /home/mihai/Projects/Opt/API/release/include)
+#set(OPT_LIBRARIES /home/mihai/Projects/Opt/API/release/lib/libOptDev.a)
+#set(TERRA_LIBRARIES /home/mihai/Projects/terra/lib/libterra.a)
+#set(OPENMESH_LIBRARIES /home/mihai/Downloads/OpenMesh-6.3/build/Build/lib/libOpenMeshCore.a /home/mihai/Downloads/OpenMesh-6.3/build/Build/lib/libOpenMeshTools.a)
+
+set(OPT_INCLUDE_DIRS /home/hhg/Documents/myGithub2/Optlang/Opt/examples/external/mLib/include /home/hhg/Documents/myGithub2/Optlang/Opt/examples/shared/ /home/hhg/Documents/myGithub2/Optlang/Opt/API/release/include)
+set(OPT_LIBRARIES /home/hhg/Documents/myGithub2/Optlang/Opt/API/release/lib/libOptDev.a)
+set(TERRA_LIBRARIES /home/hhg/Documents/myGithub2/Optlang/terra/lib/libterra.a)
+set(OPENMESH_LIBRARIES /home/hhg/Documents/myGithub2/OpenMesh-6.3/build/Build/lib/libOpenMeshCore.a /home/hhg/Documents/myGithub2/OpenMesh-6.3/build/Build/lib/libOpenMeshTools.a)
+
+
 
 add_subdirectory(kfusion)
 add_subdirectory(apps)
+#target_link_libraries(dynamicfusion /home/hhg/Documents/myGithub2/OpenMesh-6.3/build/Build/lib/libOpenMeshCore.a)
+
+
 
 if(BUILD_TESTS)
   find_package(GTest REQUIRED)

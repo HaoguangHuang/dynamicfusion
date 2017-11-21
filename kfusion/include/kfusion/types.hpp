@@ -23,7 +23,7 @@ namespace kfusion
 
         Intr ();
         Intr (float fx, float fy, float cx, float cy);
-        Intr operator()(int level_index) const;
+        Intr operator()(int level_index) const; // for hierarchical
     };
 
     KF_EXPORTS std::ostream& operator << (std::ostream& os, const Intr& intr);

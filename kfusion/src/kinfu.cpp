@@ -32,8 +32,8 @@ kfusion::KinFuParams kfusion::KinFuParams::default_params_dynamicfusion()
     p.rows = 480;  //pixels
     p.intr = Intr(570.342f, 570.342f, 320.f, 240.f);
 
-    p.volume_dims = Vec3i::all(256);  //number of voxels
-    p.volume_size = Vec3f::all(1.f);  //meters
+    p.volume_dims = Vec3i::all(256);  //number of voxels  256*256*256
+    p.volume_size = Vec3f::all(1.f);  //meters   1m*1m*1m
     p.volume_pose = Affine3f().translate(Vec3f(-p.volume_size[0]/2, -p.volume_size[1]/2, 0.5f));
 
     p.bilateral_sigma_depth = 0.04f;  //meter
@@ -377,6 +377,7 @@ void kfusion::KinFu::dynamicfusion(cuda::Depth& depth, cuda::Cloud live_frame, c
     for (int i = 0; i < cloud_host.rows; i++)
         for (int j = 0; j < cloud_host.cols; j++) {
             auto point = cloud_host.at<Point>(i, j);
+            //first transform the canonical model from model coo into camera coo.
             live[i * cloud_host.cols + j] = cv::Vec3f(point.x, point.y, point.z);
         }
 

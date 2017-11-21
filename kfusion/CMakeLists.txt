@@ -17,6 +17,7 @@ target_link_libraries(kfusion
         ${OpenCV_LIBS}
         ${OPENNI_LIBRARY}
         ${CERES_LIBRARIES})
+message("hhg:-------------------OPENMESH_LIBRARIES:" ${OPENMESH_LIBRARIES})
 
 target_include_directories(kfusion PUBLIC ${OPT_INCLUDE_DIRS})
 target_compile_definitions(kfusion PUBLIC SOLVERPATH=${CMAKE_SOURCE_DIR}/kfusion/solvers/)

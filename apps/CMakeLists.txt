@@ -6,6 +6,7 @@ target_link_libraries(dynamicfusion ${OpenCV_LIBS}
         ${OPT_LIBRARIES}
         ${TERRA_LIBRARIES}
         ${CUDA_CUDART_LIBRARY}
+       # ${OPENMESH_LIBRARIES}
         kfusion
         )
 
