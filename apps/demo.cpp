@@ -57,7 +57,7 @@ struct DynamicFusionApp
 
         view_host_.create(view_device_.rows(), view_device_.cols(), CV_8UC4);
         view_device_.download(view_host_.ptr<void>(), view_host_.step);
-        std::string path = "/home/mihai/Projects/dynamicfusion/output/" + std::to_string(i) + ".jpg";
+        std::string path = "/home/hhg/Documents/myGithub2/dynamicfusion/output/" + std::to_string(i) + ".jpg";
         cv::imshow("Scene", view_host_);
         cv::imwrite(path, view_host_);
         cvWaitKey(100);
@@ -78,6 +78,8 @@ struct DynamicFusionApp
         bool has_image = false;
         std::vector<cv::String> depths;             // store paths,
         std::vector<cv::String> images;             // store paths,
+
+        dir_name = "/home/hhg/Documents/myGithub2/dynamicfusion/data/umbrella";
 
         cv::glob(dir_name + "/depth", depths);
         cv::glob(dir_name + "/color", images);

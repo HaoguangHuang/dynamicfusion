@@ -80,7 +80,7 @@ namespace kfusion
         int frame_counter_;
         KinFuParams params_;
 
-        std::vector<Affine3f> poses_;
+        std::vector<Affine3f> poses_;  //camera motion in every frame
 
         cuda::Dists dists_;
         cuda::Frame curr_, prev_, first_;

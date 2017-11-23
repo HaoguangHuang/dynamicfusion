@@ -79,8 +79,8 @@ endif()
 set(OPT_INCLUDE_DIRS /home/hhg/Documents/myGithub2/Optlang/Opt/examples/external/mLib/include /home/hhg/Documents/myGithub2/Optlang/Opt/examples/shared/ /home/hhg/Documents/myGithub2/Optlang/Opt/API/release/include)
 set(OPT_LIBRARIES /home/hhg/Documents/myGithub2/Optlang/Opt/API/release/lib/libOptDev.a)
 set(TERRA_LIBRARIES /home/hhg/Documents/myGithub2/Optlang/terra/lib/libterra.a)
-set(OPENMESH_LIBRARIES /home/hhg/Documents/myGithub2/OpenMesh-6.3/build/Build/lib/libOpenMeshCore.a /home/hhg/Documents/myGithub2/OpenMesh-6.3/build/Build/lib/libOpenMeshTools.a)
-
+#set(OPENMESH_LIBRARIES /home/hhg/Documents/myGithub2/OpenMesh-6.3/build/Build/lib/libOpenMeshCore.a /home/hhg/Documents/myGithub2/OpenMesh-6.3/build/Build/lib/libOpenMeshTools.a)
+set(OPENMESH_LIBRARIES /home/hhg/Documents/myGithub2/OpenMesh-6.3/build/src/OpenMesh/Core/libOpenMeshCored.a /home/hhg/Documents/myGithub2/OpenMesh-6.3/build/src/OpenMesh/Tools/libOpenMeshToolsd.a)
 
 
 add_subdirectory(kfusion)

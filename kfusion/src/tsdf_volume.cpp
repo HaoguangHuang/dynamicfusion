@@ -166,8 +166,8 @@ void kfusion::cuda::TsdfVolume::raycast(const Affine3f& camera_pose, const Intr&
 {
     device::Normals& n = (device::Normals&)normals;
     device::Points& p = (device::Points&)points;
-
-    Affine3f cam2vol = pose_.inv() * camera_pose;
+    //cam2vol:camera coo to volume coo
+    Affine3f cam2vol = pose_.inv() * camera_pose; //pose_:model/volume coo to first frame camera coo; camera_pose:
 
     device::Aff3f aff = device_cast<device::Aff3f>(cam2vol);
     device::Mat3f Rinv = device_cast<device::Mat3f>(cam2vol.rotation().inv(cv::DECOMP_SVD));
@@ -234,8 +234,8 @@ void kfusion::cuda::TsdfVolume::fetchNormals(const DeviceArray<Point>& cloud, De
  * \param intr
  */
 void kfusion::cuda::TsdfVolume::surface_fusion(const WarpField& warp_field,
-                                               std::vector<Vec3f> warped,
-                                               std::vector<Vec3f> canonical,
+                                               std::vector<Vec3f> warped, // canonical warped into live frame coo
+                                               std::vector<Vec3f> canonical, //
                                                cuda::Depth& depth,
                                                const Affine3f& camera_pose,
                                                const Intr& intr)

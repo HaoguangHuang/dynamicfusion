@@ -287,7 +287,7 @@ bool kfusion::KinFu::operator()(const kfusion::cuda::Depth& depth, const kfusion
             return reset(), false;
     }
 
-    poses_.push_back(poses_.back() * affine); // curr -> global
+    poses_.push_back(poses_.back() * affine); // curr -> global         hhg:var pose_ saves camera motions in every frame
 //    auto d = depth;
     auto d = curr_.depth_pyr[0];
     auto pts = curr_.points_pyr[0];
@@ -363,7 +363,7 @@ void kfusion::KinFu::dynamicfusion(cuda::Depth& depth, cuda::Cloud live_frame, c
     cv::Mat cloud_host(depth.rows(), depth.cols(), CV_32FC4);
     cloud.download(cloud_host.ptr<Point>(), cloud_host.step);
     std::vector<Vec3f> canonical(cloud_host.rows * cloud_host.cols);
-    auto inverse_pose = camera_pose.inv(cv::DECOMP_SVD);
+    auto inverse_pose = camera_pose.inv(cv::DECOMP_SVD); //transform from camera coo into model coo
     for (int i = 0; i < cloud_host.rows; i++)
         for (int j = 0; j < cloud_host.cols; j++) {
             auto point = cloud_host.at<Point>(i, j);
@@ -397,9 +397,9 @@ void kfusion::KinFu::dynamicfusion(cuda::Depth& depth, cuda::Cloud live_frame, c
 
     optimiser_->optimiseWarpData(canonical, canonical_normals, live, canonical_normals); // Normals are not used yet so just send in same data
 
-    getWarp().warp(canonical, canonical_normals);
+    getWarp().warp(canonical, canonical_normals); //DQB. now varable canonical represent points warped into live frame
 //    //ScopeTime time("fusion");
-    tsdf().surface_fusion(getWarp(), canonical, canonical_visible, depth, camera_pose, params_.intr);
+    tsdf().surface_fusion(getWarp(), canonical, canonical_visible, depth, camera_pose, params_.intr); //here variable 'canonical' are warped points
 
     cv::Mat depth_cloud(depth.rows(),depth.cols(), CV_16U);
     depth.download(depth_cloud.ptr<void>(), depth_cloud.step);

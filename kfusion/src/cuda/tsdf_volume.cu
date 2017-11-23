@@ -394,7 +394,7 @@ namespace kfusion
                         if (!isnan(normal.x * normal.y * normal.z))
                         {
                             normal = Rinv * normal;
-                            vertex = Rinv * (vertex - aff.t);
+                            vertex = Rinv * (vertex - aff.t); //back to
 
                             normals(y, x) = make_float4(normal.x, normal.y, normal.z, 0.f);
                             points(y, x) = make_float4(vertex.x, vertex.y, vertex.z, 0.f);
